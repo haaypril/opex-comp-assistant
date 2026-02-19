@@ -332,8 +332,10 @@ def main() -> None:
     st.markdown(
         """
         <style>
-        .stApp, .stApp * {
-            font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+.stApp {
+    font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
         }
         </style>
         """,
