@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 from io import BytesIO
 from pathlib import Path
 import tempfile
@@ -30,6 +31,7 @@ METADATA_PATH = APP_HOME / "opex_app_metadata.json"
 REGISTRY_PATH = APP_HOME / "property_registry.csv"
 RULES_PATH = BASE_DIR / "config" / "expense_mapping_rules.json"
 OVERRIDES_PATH = BASE_DIR / "config" / "expense_overrides.csv"
+FONT_DIR = BASE_DIR / "assets" / "fonts"
 
 
 def build_comp_table(
@@ -327,15 +329,89 @@ def build_metadata_df(monthly_df: pd.DataFrame, metadata_map: dict, registry_map
     return pd.DataFrame(rows)
 
 
+def _font_weight_from_name(name: str) -> int:
+    lower = name.lower()
+    if "thin" in lower:
+        return 100
+    if "extralight" in lower or "ultralight" in lower:
+        return 200
+    if "light" in lower:
+        return 300
+    if "medium" in lower:
+        return 500
+    if "semibold" in lower or "demibold" in lower:
+        return 600
+    if "bold" in lower:
+        return 700
+    if "extrabold" in lower or "ultrabold" in lower:
+        return 800
+    if "black" in lower or "heavy" in lower:
+        return 900
+    return 400
+
+
+def build_font_css() -> str:
+    # Embed local Bicyclette font files when available so Streamlit Cloud can render them.
+    candidates = sorted(
+        [
+            p
+            for p in FONT_DIR.glob("*")
+            if p.suffix.lower() in {".woff2", ".woff", ".ttf", ".otf"}
+            and "bicyclette" in p.stem.lower()
+        ]
+    )
+    parts: list[str] = []
+    mime_by_ext = {
+        ".woff2": "font/woff2",
+        ".woff": "font/woff",
+        ".ttf": "font/ttf",
+        ".otf": "font/otf",
+    }
+    format_by_ext = {
+        ".woff2": "woff2",
+        ".woff": "woff",
+        ".ttf": "truetype",
+        ".otf": "opentype",
+    }
+
+    for font_path in candidates:
+        ext = font_path.suffix.lower()
+        mime = mime_by_ext.get(ext)
+        fmt = format_by_ext.get(ext)
+        if not mime or not fmt:
+            continue
+        try:
+            encoded = base64.b64encode(font_path.read_bytes()).decode("ascii")
+        except Exception:
+            continue
+        weight = _font_weight_from_name(font_path.stem)
+        parts.append(
+            (
+                "@font-face{"
+                'font-family:"Bicyclette";'
+                "font-style:normal;"
+                f"font-weight:{weight};"
+                f"src:url(data:{mime};base64,{encoded}) format('{fmt}');"
+                "font-display:swap;"
+                "}"
+            )
+        )
+    return "\n".join(parts)
+
+
 def main() -> None:
     st.set_page_config(page_title="OpEx Comp Assistant", layout="wide")
+    font_face_css = build_font_css()
     st.markdown(
-        """
+        f"""
         <style>
-.stApp {
-    font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
-}
-
+        {font_face_css}
+        .stApp {
+            font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+        }
+        h1, .stMarkdown h1 {
+            font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+            font-weight: 700 !important;
         }
         </style>
         """,
