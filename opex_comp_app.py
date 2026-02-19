@@ -402,10 +402,10 @@ def build_font_css() -> str:
 def main() -> None:
     st.set_page_config(page_title="OpEx Comp Assistant", layout="wide")
     font_face_css = build_font_css()
-    st.markdown(
-        f"""
-        <style>
-        {font_face_css}
+    style_block = (
+        "<style>\n"
+        + font_face_css
+        + """
         .stApp {
             font-family: "Bicyclette", "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
         }
@@ -414,7 +414,10 @@ def main() -> None:
             font-weight: 700 !important;
         }
         </style>
-        """,
+        """
+    )
+    st.markdown(
+        style_block,
         unsafe_allow_html=True,
     )
     st.title("OpEx Comp Assistant")
