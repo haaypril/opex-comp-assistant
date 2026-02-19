@@ -400,7 +400,7 @@ def build_font_css() -> str:
 
 
 def main() -> None:
-    st.set_page_config(page_title="OpEx Comp Assistant", layout="wide")
+    st.set_page_config(page_title="OpEx Comp Assistant", page_icon="assets/icon.png", layout="wide")
     font_face_css = build_font_css()
     style_block = (
         "<style>\n"
