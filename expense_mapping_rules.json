@@ -1,0 +1,277 @@
+{
+  "ignore_patterns": [
+    "^total\\b",
+    "\\bnet\\b",
+    "\\bnoi\\b",
+    "\\bincome\\b",
+    "\\brevenue\\b",
+    "\\bvacanc",
+    "\\bconcession",
+    "\\bcapital",
+    "\\bnon-operating\\b",
+    "\\binterest\\b",
+    "\\brent\\b",
+    "\\bloss to lease\\b",
+    "\\bgain to lease\\b",
+    "\\bassistance payments\\b",
+    "\\bpet fees?\\b",
+    "\\blate fees?\\b",
+    "\\bnsf\\b",
+    "\\bdamages? and reletting\\b",
+    "\\bdamage & cleaning\\b",
+    "\\bapplication fee\\b",
+    "\\bbad debts?\\b",
+    "\\bdepreciation\\b",
+    "\\bamortization\\b",
+    "\\blate charges\\b",
+    "\\bapplication fees?\\b",
+    "\\breletting fee\\b",
+    "\\bgain/loss to old lease\\b",
+    "\\bdebt service\\b",
+    "\\bcash flow\\b"
+  ],
+  "mapping_rules": [
+    {
+      "name": "management_fee",
+      "category": "management fee",
+      "code_prefixes": [
+        "6320",
+        "5350",
+        "750050",
+        "750",
+        "7050",
+        "6350.012"
+      ],
+      "patterns": [
+        "\\bmanagement fee\\b",
+        "\\basset management fee\\b"
+      ],
+      "exclude_patterns": []
+    },
+    {
+      "name": "payroll_core",
+      "category": "payroll",
+      "code_prefixes": [
+        "711",
+        "712",
+        "713",
+        "714",
+        "523",
+        "6310.014",
+        "6330",
+        "6540",
+        "6711",
+        "6723",
+        "5201",
+        "5209"
+      ],
+      "patterns": [
+        "\\bpayroll\\b",
+        "\\bsalar",
+        "\\bwages?\\b",
+        "\\bbonus\\b",
+        "\\bwork'?e?r'?s?\\s*comp",
+        "\\b401k\\b",
+        "\\buniforms?\\b",
+        "\\bemployee benefits?\\b",
+        "\\bpayroll processing\\b",
+        "^manager$",
+        "\\bcontract labor\\b",
+        "\\btemp'?s?\\b"
+      ],
+      "exclude_patterns": []
+    },
+    {
+      "name": "utilities",
+      "category": "utilities",
+      "code_prefixes": [
+        "6450",
+        "6451",
+        "6453",
+        "6459",
+        "6460",
+        "720",
+        "5700",
+        "5705",
+        "5720",
+        "5735",
+        "5509"
+      ],
+      "patterns": [
+        "\\butilit",
+        "\\belectric",
+        "\\bwater\\b",
+        "\\bsewer\\b",
+        "\\btrash\\b",
+        "\\brefuse\\b",
+        "\\bgas\\b",
+        "\\bpower\\b",
+        "\\butility billing\\b"
+      ],
+      "exclude_patterns": [
+        "\\bincome\\b"
+      ]
+    },
+    {
+      "name": "property_taxes",
+      "category": "property taxes",
+      "code_prefixes": [
+        "760",
+        "6710",
+        "5810"
+      ],
+      "patterns": [
+        "\\bproperty tax",
+        "\\breal estate tax",
+        "\\bad valorem",
+        "\\btax service\\b"
+      ],
+      "exclude_patterns": [
+        "\\bpayroll tax",
+        "\\bsales taxes-utilities\\b"
+      ]
+    },
+    {
+      "name": "insurance_property",
+      "category": "insurance",
+      "code_prefixes": [
+        "5830",
+        "6720"
+      ],
+      "patterns": [
+        "\\bproperty/liability insurance\\b",
+        "\\bproperty insurance\\b",
+        "\\binsurance\\b"
+      ],
+      "exclude_patterns": [
+        "\\bemployee\\b",
+        "\\bworkers? comp\\b",
+        "\\bbenefits?\\b"
+      ]
+    },
+    {
+      "name": "replacement_reserves",
+      "category": "replacement reserves",
+      "code_prefixes": [
+        "5960",
+        "694",
+        "9060"
+      ],
+      "patterns": [
+        "\\brepl\\b",
+        "\\breplacement reserve\\b",
+        "\\breserves?\\b"
+      ],
+      "exclude_patterns": [
+        "\\bincome\\b"
+      ]
+    },
+    {
+      "name": "repairs_and_maintenance",
+      "category": "repairs & maintenance",
+      "code_prefixes": [
+        "6515",
+        "6520",
+        "6546",
+        "6548",
+        "730",
+        "735",
+        "5502",
+        "5500",
+        "5501",
+        "5508",
+        "551",
+        "5520",
+        "5540",
+        "5602",
+        "5604",
+        "5606",
+        "5607",
+        "9004",
+        "9011",
+        "9043",
+        "9116",
+        "174",
+        "906"
+      ],
+      "patterns": [
+        "\\brepair",
+        "\\bmaint",
+        "\\bmake ready\\b",
+        "\\blandscap",
+        "\\bgrounds?\\b",
+        "\\bhvac\\b",
+        "\\bplumb",
+        "\\blocks?\\b",
+        "\\bappliance\\b",
+        "\\bexterminat",
+        "\\bfire equipment\\b",
+        "\\bpainting supplies\\b",
+        "\\bmaintenance supplies\\b",
+        "\\blife safety\\b",
+        "\\bcourtesy patrol\\b",
+        "\\bpest control\\b",
+        "\\belevator expense\\b",
+        "\\binterior cleaning\\b",
+        "\\bpainting contract\\b",
+        "\\bwindows, doors\\b",
+        "\\bhardware - parts\\b",
+        "\\bheating\\s*&\\s*a/?c\\b",
+        "\\bdoors - interior\\b",
+        "\\bappliances?\\b"
+      ],
+      "exclude_patterns": [
+        "\\bincome\\b",
+        "\\bpayroll\\b"
+      ]
+    },
+    {
+      "name": "general_admin_advertising",
+      "category": "general & admin & advertising",
+      "code_prefixes": [
+        "6210",
+        "740",
+        "745",
+        "5308",
+        "5401",
+        "53"
+      ],
+      "patterns": [
+        "\\badmin",
+        "\\badvert",
+        "\\bmarketing\\b",
+        "\\boffice\\b",
+        "\\btelephone\\b",
+        "\\bcomputer\\b",
+        "\\bdues\\b",
+        "\\bpostage\\b",
+        "\\bprinting\\b",
+        "\\btraining\\b",
+        "\\bcredit check",
+        "\\bdata processing",
+        "\\bbank charges?\\b",
+        "\\bbank service charge\\b",
+        "\\baccounting\\b",
+        "\\baudit\\b",
+        "\\bcompliance fees?\\b",
+        "\\bprofessional fees?\\b",
+        "\\bmonitoring\\b",
+        "\\btravel\\b",
+        "\\bmileage\\b",
+        "\\bmeal\\b",
+        "\\bguest supplies\\b",
+        "\\bpersonnel expense\\b",
+        "\\blease-up\\b",
+        "\\bowner expenses?\\b",
+        "\\bsoftware access\\b",
+        "\\bcollateral materials\\b",
+        "\\bsupportive services\\b",
+        "\\bresident retention\\b",
+        "\\bother expense\\b",
+        "\\bpromotions?\\b",
+        "\\bsignage\\b"
+      ],
+      "exclude_patterns": []
+    }
+  ]
+}

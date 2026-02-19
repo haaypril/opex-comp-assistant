@@ -1,0 +1,15 @@
+match_type,pattern,category,note
+code,5205,payroll,Assistant maintenance payroll treated as payroll
+code,5204,payroll,Lead maintenance payroll treated as payroll
+contains,security payroll,payroll,Security payroll/contracts treated as payroll
+code,7050,management fee,Asset management fee account code
+code,770910,general & admin & advertising,Mortgage fee forced to G&A if needed
+code,521050,general & admin & advertising,Miscellaneous defaults to G&A
+code,5990.016,general & admin & advertising,Credit card convenience fee
+code,6311.018,general & admin & advertising,Employee education
+code,6311.090,general & admin & advertising,PMS and resident portal stack
+code,4041,repairs & maintenance,Cleaning and damages treated as maintenance
+code,7510,general & admin & advertising,Professional services
+code,9021,general & admin & advertising,Prior year expense
+code,725250,repairs & maintenance,
+code,725350,repairs & maintenance,
